@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
 import './board.css';
+import axios from 'axios';
+
 
 class Items extends Component {
 
@@ -33,11 +34,11 @@ class Items extends Component {
 class Board extends Component {
 
     render() {
-        const title = this.props.title;
+        const title = this.props.info.name;
         return (
             <div className="board-container">
                 <p className="close">x</p>
-                <h1>{title}</h1>
+                <h1>{ title }</h1>
                 <Items />
             </div>
         )
@@ -46,14 +47,42 @@ class Board extends Component {
 
 export class BoardContainer extends Component {
 
+    constructor (props) {
+        super(props)
+
+        this.state = {
+            data: []
+        }
+
+        this.getData = this.getData.bind(this)
+    }
+
+    getData() {
+        var url = '/api'
+        axios.get(url)
+            .then( (res) => {
+                console.log(res.data)
+                this.setState({ data: res.data })
+            })
+    }
+
+    postData(name) {
+        var url = '/api'
+        axios.post()
+    }
+
+    componentDidMount() {
+        this.getData()
+
+    }
+
     render() {
-        const boards = this.props.boards;
+        const boards = this.state.data ? this.state.data.map( (item, index) => <Board key={ item._id } info={ item } />) : null
 
         return (
             <div>
                 <input type="text" />
                 { boards ? boards : null }
-                <Board title="title!"/>
             </div>
         )
     }
