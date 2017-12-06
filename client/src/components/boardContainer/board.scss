@@ -1,0 +1,29 @@
+.close {
+    position: absolute;
+    cursor: pointer;
+    font-size: 2em;
+    color: red;
+    top: -35px;
+    right: 10px;
+}
+.board-container {
+    position: absolute;
+    width: 20em;
+    height: 30em;
+    background-color: #f8f8f88a;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 10px;
+
+}
+
+.items-block {
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+
+    .item {
+
+
+    }
+}
