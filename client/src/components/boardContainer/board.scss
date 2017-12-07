@@ -1,18 +1,54 @@
+.board-input {
+    border: none;
+    width: 20vw;
+    display: flex;
+    height: 3em;
+    padding-left: 30px;
+    padding-top: 50px;
+
+    input {
+        -webkit-appearance: none;
+        background-color: transparent;
+        margin: 0 auto;
+        box-shadow: none;
+        border: none;
+
+    }
+}
+
 .close {
     position: absolute;
     cursor: pointer;
     font-size: 2em;
     color: red;
-    top: -35px;
+    top: 0px;
     right: 10px;
 }
 .board-container {
-    position: absolute;
-    width: 20em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.board {
+    min-width: 20vw;
     height: 30em;
+    margin: 2em;
     background-color: #f8f8f88a;
     border: 1px solid rgb(207, 207, 207);
     border-radius: 10px;
+
+    .board-header {
+        position: absolute;
+        width: 20vw;
+
+        .board-name {
+            margin: 20px 0 0 10px;
+        }
+    }
+
+    .board-contents {
+        margin-top: 5em;
+    }
 
 }
 

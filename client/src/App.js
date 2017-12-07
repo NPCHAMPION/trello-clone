@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div>
         <MainLayout>
-          <BoardContainer />
+          <BoardContainer url='/api/' />
         </MainLayout>
       </div>
     );

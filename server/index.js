@@ -64,7 +64,9 @@ app.route('/api')
     })
   })
 
+  // add new entry
   .post( (req, res) => {
+    console.log(req.body)
     var board = new Board()
     board.name = req.body.name
     board.save( (err) => {
@@ -76,10 +78,33 @@ app.route('/api')
     })
   })
 
-// Catch all other routes and return the Angular index file
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/dist/index.html'))
-// })
+app.route('/api/:board_id')
+  /**
+  Need a new route for put and delete so that
+  we can pass the board id into the route
+  */
+
+  // put = update a current entry
+  .put( (req, res) => {
+
+  })
+
+  // delete an entry
+  .delete( (req, res) => {
+    Board.remove({ _id: req.params.board_id }, (err, board) => {
+      if (err) {
+        res.send(err)
+      } else {
+        res.json({ message: 'Comment has been deleted!' })
+      }
+    })
+  })
+
+// Catch all other routes and redirect to the home page
+// (make sure this is the last route in this file)
+app.get('*', (req, res) => {
+  res.redirect('/')
+})
 
 /**
  * Get port from environment.
