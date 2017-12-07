@@ -4,7 +4,7 @@ mongoose.Promise = global.Promise
 const schema = mongoose.Schema
 
 const ItemSchema = schema({
-    name: { type: String, required: true } 
+  name: { type: String, required: true }
 
 })
 

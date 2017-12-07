@@ -1,12 +1,10 @@
 const express = require('express')
-const path = require('path')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
-/*********** MONGODB **********/
-// SCHEMAS 
+/** MONGODB */
+// SCHEMAS
 const List = require('./model/List')
-const Item = require('./model/Item')
 
 // SETUP (db exported at bottom)
 
@@ -33,7 +31,7 @@ const db = mongoose.connection
 // Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error: '))
 
-/*********** MAIN EXPRESS APP AND ROUTES *******/
+/** MAIN EXPRESS APP AND ROUTES *******/
 const app = express()
 // body parser allows us to do req.body from a POST method
 app.use(bodyParser.json())
@@ -41,8 +39,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }))
 
-app.use( (req, res, next) => {
-
+app.use((req, res, next) => {
   next()
 })
 
@@ -51,11 +48,11 @@ app.get('/', (req, res) => {
   res.send('it works!')
 })
 
-//app.get() === app.route().get()
+// app.get() === app.route().get()
 app.route('/api')
 
-  .get( (req, res) => {
-    List.find( (err, data) => {
+  .get((req, res) => {
+    List.find((err, data) => {
       if (err) {
         res.send(err)
       } else {
@@ -65,15 +62,14 @@ app.route('/api')
   })
 
   // add new entry
-  .post( (req, res) => {
-    console.log(req.body)
+  .post((req, res) => {
     var list = new List()
     list.name = req.body.name
-    list.save( (err) => {
+    list.save((err) => {
       if (err) {
         res.send(err)
       } else {
-        res.json({ message: 'successfully added a board!' })
+        res.json({ message: 'successfully added a list!' })
       }
     })
   })
@@ -85,12 +81,23 @@ app.route('/api/:list_id')
   */
 
   // put = update a current entry
-  .put( (req, res) => {
-
+  .put((req, res) => {
+    List.findById(req.params.list_id, (err, list) => {
+      if (!list) {
+        res.send(err)
+      } else {
+        list.name = req.body.name
+        list.save((err, success) => {
+          if (err) {
+            console.log(err)
+          }
+        })
+      }
+    })
   })
 
   // delete an entry
-  .delete( (req, res) => {
+  .delete((req, res) => {
     List.remove({ _id: req.params.list_id }, (err, list) => {
       if (err) {
         res.send(err)
@@ -114,5 +121,5 @@ const port = process.env.PORT || '3030'
 app.listen(port, () => console.log('Server is up and running on port ' + port))
 
 module.exports = {
-	db: db
+  db: db
 }

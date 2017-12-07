@@ -1,58 +1,7 @@
 import React, { Component } from 'react';
+import List from '../list/List';
 import './board.css';
 import axios from 'axios';
-
-
-class Items extends Component {
-
-    render() {
-        const fakeData = [
-            {
-                "name": 'item1',
-                "contents": 'words about item1'
-            },
-            {
-                name: 'item2',
-                "contents": "words about item 2"
-            }
-        ];
-        
-        const items = fakeData.map( (item,index) => 
-            <div className="item" key={ index }>
-                <h3>{item.name}</h3>
-                <p>{item.contents}</p>
-            </div>
-        )
-        return (
-            <div className="items-block">
-                {items}
-            </div>
-        )
-    }
-}
-
-class List extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {}
-    }
-
-    render() {
-        const title = this.props.info.name;
-        return (
-            <div className="board">
-                <div className="board-header">
-                    { this.props.children }
-                    <h2 className="board-name">{ title }</h2>
-                </div>
-                <div className="board-contents">
-                    <Items />
-                </div>
-            </div>
-        )
-    }
-}
 
 export class Board extends Component {
 
@@ -68,7 +17,6 @@ export class Board extends Component {
         this.handleNameChange = this.handleNameChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
-
 
     handleSubmit(event) {
         // add new board
@@ -110,7 +58,6 @@ export class Board extends Component {
                 console.log('Board deleted!')
             })
             .catch( err => alert(err))
-
         // refresh boards
         this.getLists()
     }
