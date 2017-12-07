@@ -2,11 +2,11 @@ const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const cors = require('cors');
 
 /*********** MONGODB **********/
 // SCHEMAS 
-const Board = require('./model/Board')
+const List = require('./model/List')
+const Item = require('./model/Item')
 
 // SETUP (db exported at bottom)
 
@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
 app.route('/api')
 
   .get( (req, res) => {
-    Board.find( (err, data) => {
+    List.find( (err, data) => {
       if (err) {
         res.send(err)
       } else {
@@ -67,9 +67,9 @@ app.route('/api')
   // add new entry
   .post( (req, res) => {
     console.log(req.body)
-    var board = new Board()
-    board.name = req.body.name
-    board.save( (err) => {
+    var list = new List()
+    list.name = req.body.name
+    list.save( (err) => {
       if (err) {
         res.send(err)
       } else {
@@ -78,7 +78,7 @@ app.route('/api')
     })
   })
 
-app.route('/api/:board_id')
+app.route('/api/:list_id')
   /**
   Need a new route for put and delete so that
   we can pass the board id into the route
@@ -91,11 +91,11 @@ app.route('/api/:board_id')
 
   // delete an entry
   .delete( (req, res) => {
-    Board.remove({ _id: req.params.board_id }, (err, board) => {
+    List.remove({ _id: req.params.list_id }, (err, list) => {
       if (err) {
         res.send(err)
       } else {
-        res.json({ message: 'Comment has been deleted!' })
+        res.json({ message: 'List has been deleted!' })
       }
     })
   })

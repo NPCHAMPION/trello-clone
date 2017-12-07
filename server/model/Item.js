@@ -3,9 +3,9 @@ mongoose.Promise = global.Promise
 
 const schema = mongoose.Schema
 
-const BoardSchema = schema({
+const ItemSchema = schema({
     name: { type: String, required: true } 
 
 })
 
-module.exports = mongoose.model('Board', BoardSchema)
+module.exports = mongoose.model('Item', ItemSchema)

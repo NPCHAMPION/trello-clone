@@ -17,8 +17,8 @@ class Items extends Component {
             }
         ];
         
-        const items = fakeData.map( (item) => 
-            <div className="item">
+        const items = fakeData.map( (item,index) => 
+            <div className="item" key={ index }>
                 <h3>{item.name}</h3>
                 <p>{item.contents}</p>
             </div>
@@ -31,7 +31,7 @@ class Items extends Component {
     }
 }
 
-class Board extends Component {
+class List extends Component {
     constructor(props) {
         super(props)
 
@@ -54,7 +54,7 @@ class Board extends Component {
     }
 }
 
-export class BoardContainer extends Component {
+export class Board extends Component {
 
     constructor (props) {
         super(props)
@@ -64,7 +64,7 @@ export class BoardContainer extends Component {
             name: ''
         }
 
-        this.getBoards = this.getBoards.bind(this)
+        this.getLists = this.getLists.bind(this)
         this.handleNameChange = this.handleNameChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -73,14 +73,14 @@ export class BoardContainer extends Component {
     handleSubmit(event) {
         // add new board
         event.preventDefault()
-        this.addBoard()
+        this.addList()
     }
 
     handleNameChange(e) {
         this.setState({ name: e.target.value })
     }
 
-    getBoards() {
+    getLists() {
         let url = this.props.url
         axios.get(url)
             .then( (res) => {
@@ -90,7 +90,7 @@ export class BoardContainer extends Component {
             .catch( err => console.log(err))
     }
 
-    addBoard = () => {
+    addList = () => {
         let url = this.props.url
         let name = this.state.name.trim()
         axios.post(url, {
@@ -99,11 +99,11 @@ export class BoardContainer extends Component {
             )
         .then( res => {
             this.setState({ name: '' })
-            this.getBoards()
+            this.getLists()
         })
     }
 
-    deleteBoard = (e) => {
+    deleteList = (e) => {
         var url = this.props.url + e.target.id
         axios.delete(url)
             .then( res => {
@@ -112,23 +112,23 @@ export class BoardContainer extends Component {
             .catch( err => alert(err))
 
         // refresh boards
-        this.getBoards()
+        this.getLists()
     }
 
     componentDidMount() {
-        this.getBoards()
+        this.getLists()
     }
 
     render() {
-        const boards = this.state.data ? this.state.data.map( (item, index) => (
-            <Board url={ this.props.url } key={ item._id } info={ item }>
-                <p id={ item._id } className="close" onClick={ this.deleteBoard }>x</p>
-            </Board>
+        const lists = this.state.data ? this.state.data.map( (item, index) => (
+            <List url={ this.props.url } key={ item._id } info={ item }>
+                <p id={ item._id } className="close" onClick={ this.deleteList }>x</p>
+            </List>
         )) : null
 
         return (
             <div className="board-container">
-                { boards ? boards : null }
+                { lists ? lists : null }
                 <form className="board-input" onSubmit={ this.handleSubmit }>
                     <input type="text" placeholder='Enter new board name' value={ this.state.name } onChange={ this.handleNameChange } />
                 </form>

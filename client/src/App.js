@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { MainLayout } from './layout/main/main';
-import { BoardContainer } from './components/boardContainer/boardContainer';
+import { Board } from './components/board/Board';
 
 import './app.css';
 
@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div>
         <MainLayout>
-          <BoardContainer url='/api/' />
+          <Board url='/api/' />
         </MainLayout>
       </div>
     );
