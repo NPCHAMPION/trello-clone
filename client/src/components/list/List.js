@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import './list.css'
+
 class Items extends Component {
 
     render() {
@@ -86,24 +88,55 @@ export default class List extends Component {
 
     }
 
+    edit = (e) => {
+      this.toggleEditing()
+    }
     toggleEditing = () => {
         this.setState( prevState => ({ editing: !prevState.editing }));
     }
 
     render() {
+        let header = null
+        if (this.state.editing) {
+          header =
+            <input autoFocus
+                type="text"
+                className='edit'
+                maxLength="5"
+                onChange={ this.handleNameChange }
+                onFocus={ (e) => {
+                  var val = e.target.value;
+                  e.target.value = '';
+                  e.target.value = val;
+                }}
+                defaultValue={ this.state.name }
+                onBlur= { this.handleBlur }
+                onKeyPress={ this.handleKeyPress }
+                />
+        } else {
+          header =
+            <h2
+              className="board-name"
+              onClick={ this.edit }>
+              { this.state.name }
+            </h2>
+        }
         return (
             <div className="board">
                 <div className="board-header">
                     { this.props.children } {/* for close button */}
+                    {/* { if (this.state.editing )}
                     <input
-                        className={ this.state.editing ? '' : 'hide'}
+                        className={ this.state.editing ? 'edit' : 'hide'}
+                        id={ this.props.info._id }
                         onChange={ this.handleNameChange }
                         type="text"
                         defaultValue={ this.state.name }
                         onBlur= { this.handleBlur }
                         onKeyPress={ this.handleKeyPress }
                         />
-                    <h2 className={ this.state.editing ? "board-name hide" : "board-name" } onClick={ this.toggleEditing }>{ this.state.name }</h2>
+                    <h2 className={ this.state.editing ? "board-name hide" : "board-name" } onClick={ this.edit }>{ this.state.name }</h2> */}
+                    { header }
                 </div>
                 <div className="board-contents">
                     <Items />
