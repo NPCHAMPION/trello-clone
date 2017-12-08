@@ -1,17 +1,15 @@
 /* Global Defaults */
 
-html,
-body {
-    margin: 0px;
-    padding: 0px;
-    border: 0px;
+body,
+html {
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 body {
-    font: 1em/1.25 Arial, Helvetica, sans-serif;
+  font: 1em/1.25 Arial, Helvetica, sans-serif;
 }
-
-
 /* Headlines */
 
 h1,
@@ -20,162 +18,150 @@ h3,
 h4,
 h5,
 h6 {
-    margin: 0;
-    padding: 0;
-    font-weight: normal;
-    font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
 }
-
-
 /* Text Styles */
 
-p,
-th,
-td,
-li,
+a,
+abbr,
+acronym,
+blockquote,
 dd,
 dt,
-ul,
-ol,
-blockquote,
-q,
-acronym,
-abbr,
-a,
 input,
+li,
+ol,
+p,
+q,
 select,
-textarea {
-    margin: 0;
-    padding: 0;
-    font: normal normal normal 1em/1.25 Arial, Helvetica, sans-serif;
+td,
+textarea,
+th,
+ul {
+  margin: 0;
+  padding: 0;
+  font: normal normal normal 1em/1.25 Arial, Helvetica, sans-serif;
 }
 
 blockquote {
-    margin: 1.25em;
-    padding: 1.25em
+  margin: 1.25em;
+  padding: 1.25em;
 }
 
 q {
-    font-style: italic;
+  font-style: italic;
 }
 
-acronym,
-abbr {
-    cursor: help;
-    border-bottom: 1px dashed;
+abbr,
+acronym {
+  cursor: help;
+  border-bottom: 1px dashed;
 }
 
 small {
-    font-size: .85em;
+  font-size: 0.85em;
 }
 
 big {
-    font-size: 1.2em;
+  font-size: 1.2em;
 }
-
-
 /* Links and Images */
 
 a,
-a:link,
-a:visited,
 a:active,
-a:hover {
-    text-decoration: underline;
+a:hover,
+a:link,
+a:visited {
+  text-decoration: underline;
 }
 
 img {
-    border: none;
+  border: none;
 }
-
-
 /* Tables */
 
 table {
-    margin: 0;
-    padding: 0;
-    border: none;
+  margin: 0;
+  padding: 0;
+  border: none;
 }
-
-
 /* Forms */
 
 form {
-    margin: 0;
-    padding: 0;
-    display: inline;
+  margin: 0;
+  padding: 0;
+  display: inline;
 }
 
 label {
-    cursor: pointer;
+  cursor: pointer;
 }
-
-
 /* Common Classes */
 
 .clear {
-    clear: both;
+  clear: both;
 }
 
 .floatLeft {
-    float: left;
+  float: left;
 }
 
 .floatRight {
-    float: right;
+  float: right;
 }
 
 .textLeft {
-    text-align: left;
+  text-align: left;
 }
 
 .textRight {
-    text-align: right;
+  text-align: right;
 }
 
 .textCenter {
-    text-align: center;
+  text-align: center;
 }
 
 .textJustify {
-    text-align: justify;
+  text-align: justify;
 }
 
 .blockCenter {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
-
-
 /* remember to set width */
 
 .bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .italic {
-    font-style: italic;
+  font-style: italic;
 }
 
 .underline {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .noindent {
-    margin-left: 0;
-    padding-left: 0;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .nomargin {
-    margin: 0;
+  margin: 0;
 }
 
 .nopadding {
-    padding: 0;
+  padding: 0;
 }
 
 .nobullet {
-    list-style: none;
-    list-style-image: none;
+  list-style: none;
+  list-style-image: none;
 }

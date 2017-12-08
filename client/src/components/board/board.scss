@@ -1,68 +1,63 @@
 .hide {
-    display: none;
+  display: none;
 }
+
 .board-input {
+  border: none;
+  width: 20vw;
+  display: flex;
+  height: 3em;
+  padding-left: 30px;
+  padding-top: 50px;
+
+  input {
+    -webkit-appearance: none;
+    background-color: transparent;
+    margin: 0 auto;
+    box-shadow: none;
     border: none;
-    width: 20vw;
-    display: flex;
-    height: 3em;
-    padding-left: 30px;
-    padding-top: 50px;
-
-    input {
-        -webkit-appearance: none;
-        background-color: transparent;
-        margin: 0 auto;
-        box-shadow: none;
-        border: none;
-
-    }
+  }
 }
 
 .close {
-    position: absolute;
-    cursor: pointer;
-    font-size: 2em;
-    color: red;
-    top: 0px;
-    right: 10px;
+  position: absolute;
+  cursor: pointer;
+  font-size: 2em;
+  color: red;
+  top: 0;
+  right: 10px;
 }
+
 .board-container {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .board {
-    min-width: 20vw;
-    height: 30em;
-    margin: 2em;
-    background-color: #f8f8f88a;
-    border: 1px solid rgb(207, 207, 207);
-    border-radius: 10px;
+  min-width: 20em;
+  min-height: 10em;
+  margin: 2em;
+  background-color: #f8f8f88a;
+  border: 1px solid rgb(207, 207, 207);
+  border-radius: 10px;
 
-    .board-header {
-        position: absolute;
-        width: 20vw;
+  .board-header {
+    position: relative;
+    width: 100%;
 
-        .board-name {
-            margin: 20px 0 0 10px;
-        }
+    .board-name {
+      margin: 20px 0 0 10px;
     }
+  }
 
-    .board-contents {
-        margin-top: 5em;
-    }
-
+  .board-contents {
+    margin-top: 2em;
+  }
 }
 
 .items-block {
-    border: 1px solid rgb(207, 207, 207);
-    border-radius: 10px;
-    padding: 15px;
-    margin: 10px;
-
-    .item {
-
-
-    }
+  border: 1px solid rgb(207, 207, 207);
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
 }

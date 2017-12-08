@@ -32,7 +32,6 @@ export class Board extends Component {
         let url = this.props.url
         axios.get(url)
             .then( (res) => {
-                console.log(res.data)
                 this.setState({ data: res.data })
             })
             .catch( err => console.log(err))

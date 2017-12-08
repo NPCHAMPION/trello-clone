@@ -1,0 +1,13 @@
+.item {
+  position: relative;
+  padding: 15px 10px;
+  cursor: pointer;
+
+  .close-item {
+    position: absolute;
+    top: 25%;
+    right: 15px;
+    color: red;
+    font-weight: bolder;
+  }
+}

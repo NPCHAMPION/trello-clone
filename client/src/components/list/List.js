@@ -53,7 +53,7 @@ export default class List extends Component {
             name: name
         })
             .then( res => {
-              res.send
+              res.send('List updated')
             })
             .catch( err => {
                 console.log(err)
@@ -61,9 +61,6 @@ export default class List extends Component {
 
     }
 
-    edit = (e) => {
-      this.toggleEditing()
-    }
     toggleEditing = () => {
         this.setState( prevState => ({ editing: !prevState.editing }));
     }
@@ -76,32 +73,32 @@ export default class List extends Component {
                 type="text"
                 className='edit'
                 maxLength="20"
-                onChange={ this.handleNameChange }
+                onChange={this.handleNameChange}
                 onFocus={ (e) => {
                   var val = e.target.value;
                   e.target.value = '';
                   e.target.value = val;
                 }}
-                defaultValue={ this.state.name }
-                onBlur= { this.handleBlur }
-                onKeyPress={ this.handleKeyPress }
+                defaultValue={this.state.name}
+                onBlur= {this.handleBlur}
+                onKeyPress={this.handleKeyPress}
                 />
         } else {
           header =
             <h2
               className="board-name"
-              onClick={ this.edit }>
-              { this.state.name }
+              onClick={this.toggleEditing}>
+              {this.state.name}
             </h2>
         }
         return (
             <div className="board">
                 <div className="board-header">
-                    { this.props.children } {/* for close button */}
-                    { header }
+                    {this.props.children} {/* for close button */}
+                    {header}
                 </div>
                 <div className="board-contents">
-                    <Items />
+                    <Items url='/api/item/'/>
                 </div>
             </div>
         )
