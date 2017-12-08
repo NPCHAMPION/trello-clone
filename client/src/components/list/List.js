@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Items from '../item/Item'
+import Items from '../items/Items'
 
 import './list.css'
 
@@ -94,11 +94,10 @@ export default class List extends Component {
         return (
             <div className="board">
                 <div className="board-header">
-                    {this.props.children} {/* for close button */}
                     {header}
                 </div>
                 <div className="board-contents">
-                    <Items url='/api/item/'/>
+                    <Items listId={this.props.info._id} url='/api/item/'/>
                 </div>
             </div>
         )

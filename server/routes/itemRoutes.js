@@ -2,20 +2,22 @@ const express = require('express')
 const Item = require('../schemas/Item')
 const router = express.Router()
 
-router.route('/')
+router.route('/:listId')
   .get((req, res) => {
-    Item.find((err, data) => {
-      if (err) {
-        res.send(err)
-      } else {
-        res.json(data)
-      }
-    })
+    Item.find({'listId': req.params.listId})
+      .exec((err, data) => {
+        if (err) {
+          res.send(err)
+        } else {
+          res.json(data)
+        }
+      })
   })
   // add new entry
   .post((req, res) => {
     var item = new Item()
     item.text = req.body.text
+    item.listId = req.body.listId
     item.save((err) => {
       if (err) {
         res.send(err)
@@ -32,7 +34,7 @@ router.route('/:item_id')
       if (!item) {
         res.send(err)
       } else {
-        item.name = req.body.name
+        item.text = req.body.text
         item.save((err, success) => {
           if (err) {
             console.log(err)

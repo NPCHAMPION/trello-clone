@@ -24,8 +24,8 @@
   cursor: pointer;
   font-size: 2em;
   color: red;
-  top: 0;
-  right: 10px;
+  top: 5px;
+  right: 15px;
 }
 
 .board-container {
@@ -44,14 +44,18 @@
   .board-header {
     position: relative;
     width: 100%;
+    height: 3em;
 
     .board-name {
-      margin: 20px 0 0 10px;
+      align-items: center;
+      padding: 18px 20px;
+      height: 100%;
     }
   }
 
   .board-contents {
-    margin-top: 2em;
+    margin: 2em 0 3em;
+    padding: 0 20px;
   }
 }
 

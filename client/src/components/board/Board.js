@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import List from '../list/List';
 import './board.css';
+import styles from './styles.js'
 import axios from 'axios';
 
 export class Board extends Component {
@@ -67,16 +68,17 @@ export class Board extends Component {
 
     render() {
         const lists = this.state.data ? this.state.data.map( (item, index) => (
-            <List url={ this.props.url } key={ item._id } info={ item }>
-                <p id={ item._id } className="close" onClick={ this.deleteList }>x</p>
-            </List>
+            <div style={styles.listBox} key={ item._id }>
+              <p id={ item._id } style={styles.close} onClick={ this.deleteList }>x</p>
+              <List url={ this.props.url } id={ item._id } info={ item } />
+            </div>
         )) : null
 
         return (
             <div className="board-container">
                 { lists ? lists : null }
                 <form className="board-input" onSubmit={ this.handleSubmit }>
-                    <input type="text" placeholder='Enter new board name' value={ this.state.name } onChange={ this.handleNameChange } />
+                    <input type="text" placeholder='Enter new list name' value={ this.state.name } onChange={ this.handleNameChange } />
                 </form>
             </div>
         )

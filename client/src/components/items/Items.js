@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-
+import Item from './Item'
 import './item.css'
 
 export default class Items extends Component {
@@ -19,15 +19,17 @@ export default class Items extends Component {
   }
 
   getItems = () => {
-    axios.get(this.props.url)
+    axios.get(this.props.url + this.props.listId)
       .then( res => {
         this.setState({ items: res.data })
       })
+      console.log(this.state.items);
   }
 
   addItem = () => {
-    axios.post(this.props.url, {
-      text: this.state.itemText
+    axios.post(this.props.url + this.props.listId, {
+      text: this.state.itemText,
+      listId: this.props.listId
     })
     .catch(err => alert(err))
     this.getItems()
@@ -35,13 +37,10 @@ export default class Items extends Component {
   }
 
   deleteItem = (e) => {
+    console.log('delete called');
     axios.delete(this.props.url + e.target.id)
     .catch(err => alert(err))
     this.getItems()
-  }
-
-  updateItem = () => {
-
   }
 
   changeItemText = (e) => {
@@ -54,15 +53,10 @@ export default class Items extends Component {
 
   blurAddItem = () => {
       if (!this.state.keyPressed) {
-        console.log('blurAddItem called. keyPressed: false.')
         this.addItem()
       } else {
-        // onBlur will be called when you toggleEditing() because
-        // you are removing the input element. So, we toggle keyPressed
-        // again to set everything back to normal.
         this.toggleKeyPressed()
       }
-
   }
 
   keyAddItem = (e) => {
@@ -71,18 +65,27 @@ export default class Items extends Component {
         e.preventDefault()
         this.addItem()
     }
-
   }
 
   render() {
-
     var renderedItems = null
     if (this.state.items) {
       renderedItems = this.state.items.map( (item, index) => {
         return (
           <div key={item._id} className="item">
-            <p>{item.text}</p>
-            <p className="close-item" id={item._id} onClick={this.deleteItem}>x</p>
+            <p
+              className="close-item"
+              id={item._id}
+              onClick={this.deleteItem}
+              >
+                x
+            </p>
+            <Item
+              url={this.props.url}
+              id={item._id}
+              text={item.text}
+              updateItems={this.getItems}
+            />
           </div>
         )
       })
@@ -94,6 +97,7 @@ export default class Items extends Component {
       <div>
         {renderedItems}
         <input type="text"
+          className="item-input"
           placeholder='New Item'
           value={this.state.itemText}
           onChange={this.changeItemText}
