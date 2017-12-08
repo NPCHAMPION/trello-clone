@@ -69,7 +69,7 @@ export class Board extends Component {
     render() {
         const lists = this.state.data ? this.state.data.map( (item, index) => (
             <List url={ this.props.url } key={ item._id } info={ item }>
-                <p key={ item._id } className="close" onClick={ this.deleteList }>x</p>
+                <p id={ item._id } className="close" onClick={ this.deleteList }>x</p>
             </List>
         )) : null
 
