@@ -17,7 +17,7 @@ export default class Items extends Component {
     }
 
     updateItem = () => {
-
+      
     }
 
     render() {

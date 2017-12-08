@@ -3,8 +3,6 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
 /** MONGODB */
-// SCHEMAS
-const List = require('./model/List')
 
 // SETUP (db exported at bottom)
 
@@ -48,64 +46,8 @@ app.get('/', (req, res) => {
   res.send('it works!')
 })
 
-// app.get() === app.route().get()
-app.route('/api')
-
-  .get((req, res) => {
-    List.find((err, data) => {
-      if (err) {
-        res.send(err)
-      } else {
-        res.json(data)
-      }
-    })
-  })
-
-  // add new entry
-  .post((req, res) => {
-    var list = new List()
-    list.name = req.body.name
-    list.save((err) => {
-      if (err) {
-        res.send(err)
-      } else {
-        res.json({ message: 'successfully added a list!' })
-      }
-    })
-  })
-
-app.route('/api/:list_id')
-  /**
-  Need a new route for put and delete so that
-  we can pass the board id into the route
-  */
-
-  // put = update a current entry
-  .put((req, res) => {
-    List.findById(req.params.list_id, (err, list) => {
-      if (!list) {
-        res.send(err)
-      } else {
-        list.name = req.body.name
-        list.save((err, success) => {
-          if (err) {
-            console.log(err)
-          }
-        })
-      }
-    })
-  })
-
-  // delete an entry
-  .delete((req, res) => {
-    List.remove({ _id: req.params.list_id }, (err, list) => {
-      if (err) {
-        res.send(err)
-      } else {
-        res.json({ message: 'List has been deleted!' })
-      }
-    })
-  })
+app.use('/api', require('./routes/listRoutes'))
+app.use('/api/item', require('./routes/itemRoutes'))
 
 // Catch all other routes and redirect to the home page
 // (make sure this is the last route in this file)
